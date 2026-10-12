@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Edición de vídeos de gaming en español para YouTube: cortes sin silencios, zooms, flechas, memes, sonido y miniatura. Precios de lanzamiento.">
 <meta name="robots" content="index,follow">
+<meta property="og:title" content="Gancho Edits · Edición de vídeos de gaming en español">
+<meta property="og:description" content="Me mandas el bruto de tu partida y te devuelvo un vídeo con ritmo: sin silencios, con zooms, flechas, memes y sonido.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://victor-gabriel-001.github.io/ganchoedit/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232648E8'/%3E%3Cpath d='M11 6h10v14l-5 6-5-6z' fill='%23FFC93C'/%3E%3C/svg%3E">
 <style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Gancho Edits</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,7 +213,7 @@
       <h2>Precios de lanzamiento</h2>
       <div class="packs">
         <div class="pack main">
-          <span class="tag">El más pedido</span>
+          <span class="tag">Recomendado</span>
           <h3>Vídeo largo</h3>
           <div class="price">50 €<small>por vídeo</small></div>
           <ul><li>De 8 a 15 minutos montados desde tu bruto</li><li>Cortes, zooms, flechas, notas, memes y sonido</li><li>Música libre de derechos</li><li>2 rondas de cambios</li></ul>
@@ -258,15 +263,15 @@
     <div>
       <h2>Cuéntame tu vídeo</h2>
       <form id="encargo">
-        <label for="canal">Tu canal (enlace)<input id="canal" name="canal" type="url" placeholder="https://www.youtube.com/@tucanal" required></label>
+        <label for="canal">Tu canal (enlace)<input id="canal" name="canal" type="text" placeholder="https://www.youtube.com/@tucanal o @tucanal" required></label>
         <label for="pack">Qué necesitas
           <select id="pack" name="pack"><option>Vídeo largo</option><option>Pack de shorts</option><option>Miniatura</option><option>Varias cosas / plan mensual</option></select>
         </label>
         <label for="detalle">Juego, duración del bruto y cómo lo quieres<textarea id="detalle" name="detalle" placeholder="Partida de Age of Empires IV, bruto de 1 h 20 min, quiero unos 15 min con humor"></textarea></label>
         <label for="contacto-dato">Cómo te contesto (correo o Discord)<input id="contacto-dato" name="contacto" type="text" required></label>
-        <div><button class="btn primary" type="submit">Enviar</button></div>
+        <div><button class="btn primary" type="submit">Preparar mi correo</button></div>
       </form>
-      <div class="sent" id="enviado" hidden>¡Gracias! Para que me llegue seguro, mándame esto mismo a auto.vito.matic@gmail.com y te contesto en menos de 24 horas.</div>
+      <div class="sent" id="enviado" hidden>Se ha abierto tu aplicación de correo con el mensaje preparado: solo tienes que darle a enviar. Si no se ha abierto, copia tus datos y mándalos a <code>auto.vito.matic@gmail.com</code>. Contesto en 24-48 horas.</div>
       <div class="direct">
         <span>O escribe directamente al correo:</span>
         <span><code>auto.vito.matic@gmail.com</code></span>
@@ -280,6 +285,11 @@
 <script>
   document.getElementById('encargo').addEventListener('submit', function (e) {
     e.preventDefault();
+    // Sin servidor: el formulario prepara el correo en la app del visitante (mailto) con todo rellenado
+    var v = function (id) { return document.getElementById(id).value.trim(); };
+    var asunto = 'Presupuesto de edición: ' + v('pack') + ' · ' + v('canal');
+    var cuerpo = 'Canal: ' + v('canal') + '\nQué necesito: ' + v('pack') + '\n\n' + v('detalle') + '\n\nContesto en: ' + v('contacto-dato');
+    window.location.href = 'mailto:auto.vito.matic@gmail.com?subject=' + encodeURIComponent(asunto) + '&body=' + encodeURIComponent(cuerpo);
     document.getElementById('enviado').hidden = false;
   });
 </script>
